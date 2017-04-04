@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    class Item : GameObject
+    abstract class Item : GameObject
     {
         static Random rnd = new Random();
         public Item(string name, char icon, int weight, int power) : base(name, icon)
@@ -22,12 +22,9 @@ namespace DungeonsOfDoom
         {
             Item item;
             if (rnd.Next(0, 30) % 3 == 0)
-            {
-                item = new Weapon("Sword", '?', rnd.Next(2, 7), rnd.Next(2, 6), "weapon");
-            }
+                return item = new Weapon("Sword", '?', rnd.Next(2, 7), rnd.Next(2, 6), "weapon");
             else
-                item = new Consumable("Apple", '?', 1, rnd.Next(5, 21), "consumable");
-            return item;
+                return item = new Consumable("Apple", '?', 1, rnd.Next(5, 21), "consumable");
         }
     }
 }

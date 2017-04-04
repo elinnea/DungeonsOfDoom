@@ -13,18 +13,21 @@ namespace DungeonsOfDoom
         Room[,] world;
         Random random = new Random(); //Använd samma instans av random för att slippa att alltid få samma slumptal, pga random baseras på tidsstämpel
         string latestEvent;
+        int newX = 0, newY = 0, oldX = 0, oldY = 0, oldPlayerX = 0;
 
         public void Play()
         {
             CreatePLayer();
             CreateWorld();
+            Console.Clear();
+            DisplayWorld();
             do
             {
-                Console.Clear();
-                DisplayStats();
-                DisplayWorld();
+                //Console.Clear();
+                //DisplayWorld();
                 AskForMovement();
-                CheckRoom();
+                DisplayStats();
+                //CheckRoom();
 
             } while (player.Health > 0);
 
@@ -41,9 +44,19 @@ namespace DungeonsOfDoom
                 Battle(monster);
                 if (monster.Inventory.Count > 0)
                 {
-                    latestEvent += $"\nThe monster dropped something... \nYou found: {monster.Inventory.First().Name}! Wohoo!"; // Inte så dry om flera items...
-                    player.Inventory.Add(monster.Inventory.First());
-                    player.Weight += monster.Inventory.First().Weight;
+                    Item it = monster.Inventory.First();
+                    latestEvent += $"\nThe monster dropped something... \nYou found: {it.Name}! Wohoo!"; // Inte så dry om flera items...
+                    if (player.Weight + it.Weight <= player.MaxWeight)
+                    {
+                        player.Inventory.Add(it);
+                        player.Weight += it.Weight;
+                        latestEvent += $"\nYou picked the {it.Name}.";
+                    }
+                    else
+                    {
+                        latestEvent += $"\nYour inventory is full and you couldn't pick up the {it.Name}.";
+                        tempRoom.Item = it;
+                    }
                 }
                 tempRoom.Monster = null;
 
@@ -70,11 +83,11 @@ namespace DungeonsOfDoom
                 if (random.Next(0, 10) % 2 == 0)
                 {
                     player.Health -= monster.Attack;
-                    latestEvent += $"The monster hit you for {monster.Attack} hp.";
+                    latestEvent += $"\nThe monster hit you for {monster.Attack} hp.";
                     if (player.IsAlive)
                     {
                         monster.Health -= player.Attack;
-                        latestEvent += $" You hit the monster for {player.Attack} hp\n";
+                        latestEvent += $" You hit the monster for {player.Attack} hp";
                         damageDone += player.Attack;
 
                     }
@@ -84,7 +97,7 @@ namespace DungeonsOfDoom
                 else
                 {
                     monster.Health -= player.Attack;
-                    latestEvent += $"You hit the monster for {player.Attack} hp.";
+                    latestEvent += $"\nYou hit the monster for {player.Attack} hp.";
                     if (monster.IsAlive)
                     {
                         player.Health -= monster.Attack;
@@ -103,11 +116,80 @@ namespace DungeonsOfDoom
 
         }
 
+        private void UpdateWorld(ConsoleKeyInfo keyInfo)
+        {
+            int x = player.X;
+            int y = player.Y;
+
+            newX = x == 0 ? 0 : 0 + x * 3;
+            newY = y;
+
+            //Update new position
+            Console.SetCursorPosition(newX, newY);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(" P ");
+
+            //Update old position
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.RightArrow:
+                    oldX = x == 1 ? 0 : (0 + (x - 1) * 3);
+                    oldPlayerX = x - 1;
+                    oldY = y;
+                    break;
+                case ConsoleKey.LeftArrow:
+                    oldX = 0 + (x + 1) * 3;
+                    oldPlayerX = x + 1;
+                    oldY = y;
+                    break;
+                case ConsoleKey.UpArrow:
+                    oldY = y + 1;
+                    oldX = newX;
+                    oldPlayerX = x;
+                    break;
+                case ConsoleKey.DownArrow:
+                    oldY = y - 1;
+                    oldX = newX;
+                    oldPlayerX = x;
+                    break;
+            }
+            string tmp = "";
+            if (world[oldPlayerX, oldY].Monster != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                tmp = " M ";
+            }
+            else if (world[oldPlayerX, oldY].Item != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                tmp = " ? ";
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                tmp = " . ";
+            }
+            Console.SetCursorPosition(oldX, oldY);
+            Console.Write(tmp);
+        }
+
+        private void ClearLog()
+        {
+            for (int i = 11; i < 20; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.WriteLine("                                                                                                      ");
+            }
+        }
+
         private void DisplayStats()
         {
+            ClearLog();
+            Console.SetCursorPosition(0, 11);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{player.Name}: Health: {player.Health} Attack: {player.Attack}\nWeight/Max weight : {player.Weight}/{player.MaxWeight}");
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(latestEvent);
         }
 
         private void AskForMovement()
@@ -135,6 +217,8 @@ namespace DungeonsOfDoom
                 player.Y = newY;
 
                 player.Health--;
+                CheckRoom();
+                UpdateWorld(keyInfo);
             }
         }
 
@@ -204,7 +288,7 @@ namespace DungeonsOfDoom
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
             }
-            Console.WriteLine(latestEvent);
+
         }
 
         private void GameOver()
