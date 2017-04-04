@@ -17,7 +17,7 @@ namespace DungeonsOfDoom
 
         public int Health { get; set; }
         public int Attack { get; set; }
-        public List<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; private set; }
         public bool IsAlive { get { return Health > 0; } }
     }
 }

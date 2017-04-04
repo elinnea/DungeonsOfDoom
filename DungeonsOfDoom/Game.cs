@@ -142,8 +142,9 @@ namespace DungeonsOfDoom
         {
             foreach (var item in player.Inventory)
             {
-                Console.WriteLine(item.ToString()); 
+                Console.WriteLine(item.ToString());
             }
+            Weapon.WeaponDurability(player);
             Console.ReadKey(true);
         }
 

@@ -13,5 +13,16 @@ namespace DungeonsOfDoom
 
         }
 
+        //TODO skapa metod för WeaponDurability
+        static public void WeaponDurability(Player player)
+        {
+            foreach (Item item in player.Inventory)
+            {
+                if (item is Weapon)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            }
+        }
     }
 }

@@ -20,6 +20,6 @@ namespace DungeonsOfDoom
         public int X { get; set; }
         public int Y { get; set; }
         public int Weight { get; set; }
-        public int MaxWeight { get; set; }
+        public int MaxWeight { get; private set; }
     }
 }

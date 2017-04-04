@@ -14,8 +14,8 @@ namespace DungeonsOfDoom
             Weight = weight;
             Power = power;
         }
-        public int Power { get; set; }
-        public int Weight { get; set; }
+        public int Power { get; protected set; }
+        public int Weight { get; private set; }
         
 
         public static Item GenerateItem()
