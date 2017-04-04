@@ -41,7 +41,7 @@ namespace DungeonsOfDoom
                 Battle(monster);
                 if (monster.Inventory.Count > 0)
                 {
-                    latestEvent += $"\nThe monster dropped something... You found: {monster.Inventory.First().Name}! Wohoo!"; // Inte så dry om flera items...
+                    latestEvent += $"\nThe monster dropped something... \nYou found: {monster.Inventory.First().Name}! Wohoo!"; // Inte så dry om flera items...
                     player.Inventory.Add(monster.Inventory.First());
                     player.Weight += monster.Inventory.First().Weight;
                 }
@@ -70,13 +70,14 @@ namespace DungeonsOfDoom
                 if (random.Next(0, 10) % 2 == 0)
                 {
                     player.Health -= monster.Attack;
-                    latestEvent += $"The monster hit you for {monster.Attack} hp and ";
+                    latestEvent += $"The monster hit you for {monster.Attack} hp.";
                     if (player.IsAlive)
                     {
                         monster.Health -= player.Attack;
-                        latestEvent += $"you hit the monster for {player.Attack} hp\n";
+                        latestEvent += $" You hit the monster for {player.Attack} hp\n";
+                        damageDone += player.Attack;
+
                     }
-                    damageDone += player.Attack;
                     damageTaken += monster.Attack;
 
                 }
@@ -88,9 +89,10 @@ namespace DungeonsOfDoom
                     {
                         player.Health -= monster.Attack;
                         latestEvent += $" The monster hit you for {monster.Attack} hp.";
+                        damageTaken += monster.Attack;
                     }
                     damageDone += player.Attack;
-                    damageTaken += monster.Attack;
+
                 }
 
             } while (monster.IsAlive && player.IsAlive);
@@ -233,7 +235,14 @@ namespace DungeonsOfDoom
 
                         if (random.Next(0, 100) < 10)
                         {
-                            world[x, y].Item = Item.GenerateItem();
+                            if (world[x, y].Monster != null)
+                            {
+                                world[x, y].Monster.Inventory.Add(Item.GenerateItem());
+                            }
+                            else
+                            {
+                                world[x, y].Item = Item.GenerateItem();
+                            }
                         }
                     }
                 }
