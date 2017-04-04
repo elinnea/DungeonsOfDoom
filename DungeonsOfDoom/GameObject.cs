@@ -14,7 +14,7 @@ namespace DungeonsOfDoom
             Icon = icon;
         }
 
-        public string Name { get; set; }
-        public char Icon { get; set; }
+        public string Name { get; private set; }
+        public char Icon { get; private set; }
     }
 }

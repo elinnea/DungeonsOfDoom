@@ -8,9 +8,8 @@ namespace DungeonsOfDoom
 {
     class Consumable : Item
     {
-        public Consumable(string name, char icon, int weight, int power, string type) : base(name, icon, weight, power)
+        public Consumable(string name, char icon, int weight, int power) : base(name, icon, weight, power)
         {
-            Type = type;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    class Organism : GameObject
+    abstract class Organism : GameObject
     {
         public Organism(string name, char icon, int health, int attack) : base(name, icon)
         {
@@ -17,7 +17,7 @@ namespace DungeonsOfDoom
 
         public int Health { get; set; }
         public int Attack { get; set; }
-        public List<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; private set; }
         public bool IsAlive { get { return Health > 0; } }
     }
 }

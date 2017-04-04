@@ -14,17 +14,25 @@ namespace DungeonsOfDoom
             Weight = weight;
             Power = power;
         }
-        public int Power { get; set; }
-        public int Weight { get; set; }
-        public string Type { get; protected set; }
+        public int Power { get; protected set; }
+        public int Weight { get; private set; }
+        
 
         public static Item GenerateItem()
         {
             Item item;
             if (rnd.Next(0, 30) % 3 == 0)
-                return item = new Weapon("Sword", '?', rnd.Next(2, 7), rnd.Next(2, 6), "weapon");
+            {
+                item = new Weapon("Sword", '?', rnd.Next(2, 7), rnd.Next(2, 6));
+            }
             else
-                return item = new Consumable("Apple", '?', 1, rnd.Next(5, 21), "consumable");
+                item = new Consumable("Apple", '?', 1, rnd.Next(5, 21));
+            return item;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}, power: {Power}, weight: {Weight}";
         }
     }
 }

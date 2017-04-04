@@ -8,10 +8,21 @@ namespace DungeonsOfDoom
 {
     class Weapon : Item
     {
-        public Weapon(string name, char icon, int weight, int power, string type) : base(name, icon, weight, power)
+        public Weapon(string name, char icon, int weight, int power) : base(name, icon, weight, power)
         {
-            Type = type;
+
         }
 
+        //TODO skapa metod för WeaponDurability
+        static public void WeaponDurability(Player player)
+        {
+            foreach (Item item in player.Inventory)
+            {
+                if (item is Weapon)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            }
+        }
     }
 }
