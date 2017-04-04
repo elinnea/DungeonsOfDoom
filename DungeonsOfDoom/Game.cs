@@ -43,6 +43,7 @@ namespace DungeonsOfDoom
                 {
                     latestEvent += $"\nThe monster dropped something... You found: {monster.Inventory.First().Name}! Wohoo!"; // Inte så dry om flera items...
                     player.Inventory.Add(monster.Inventory.First());
+                    player.Weight += monster.Inventory.First().Weight;
                 }
                 tempRoom.Monster = null;
 
@@ -227,7 +228,7 @@ namespace DungeonsOfDoom
 
                         if (random.Next(0, 100) < 10)
                         {
-                            world[x, y].Monster = new Monster("Monster", 'M', 10, random.Next(1, 10));
+                            world[x, y].Monster = Monster.GenerateMonster();
                         }
 
                         if (random.Next(0, 100) < 10)
