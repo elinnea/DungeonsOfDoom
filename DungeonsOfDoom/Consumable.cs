@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    class Program
+    class Consumable : Item
     {
-        static void Main(string[] args)
+        public Consumable(string name, char icon, int weight, int power, string type) : base(name, icon, weight, power)
         {
-            Console.CursorVisible = false;
-            Game game = new Game();
-            game.Play();
+            Type = type;
         }
     }
 }

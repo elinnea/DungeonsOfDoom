@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
@@ -11,6 +12,7 @@ namespace DungeonsOfDoom
         Player player;
         Room[,] world;
         Random random = new Random(); //Använd samma instans av random för att slippa att alltid få samma slumptal, pga random baseras på tidsstämpel
+        string latestEvent;
 
         public void Play()
         {
@@ -20,7 +22,7 @@ namespace DungeonsOfDoom
             {
                 Console.Clear();
                 DisplayStats();
-                DisplayWord();
+                DisplayWorld();
                 AskForMovement();
                 CheckRoom();
 
@@ -34,19 +36,75 @@ namespace DungeonsOfDoom
             Room tempRoom = world[player.X, player.Y];
             if (tempRoom.Monster != null)
             {
-                Console.WriteLine("Det finns ett monster här!!");
+                Monster monster = tempRoom.Monster;
+                latestEvent = "";
+                Battle(monster);
+                if (monster.Inventory.Count > 0)
+                {
+                    latestEvent += $"\nThe monster dropped something... You found: {monster.Inventory.First().Name}! Wohoo!"; // Inte så dry om flera items...
+                    player.Inventory.Add(monster.Inventory.First());
+                }
+                tempRoom.Monster = null;
+
+
             }
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
             {
                 player.Inventory.Add(tempRoom.Item);
+                if (tempRoom.Item.Type == "weapon")
+                {
+                    player.Attack += tempRoom.Item.Power;
+                }
                 player.Weight += tempRoom.Item.Weight;
+                latestEvent = $"Item picked up: {tempRoom.Item.Name}\nItem power: {tempRoom.Item.Power}";
                 tempRoom.Item = null;
             }
         }
 
+        private void Battle(Monster monster)
+        {
+            int damageTaken = 0, damageDone = 0;
+            do
+            {
+                if (random.Next(0, 10) % 2 == 0)
+                {
+                    player.Health -= monster.Attack;
+                    latestEvent += $"The monster hit you for {monster.Attack} hp and ";
+                    if (player.IsAlive)
+                    {
+                        monster.Health -= player.Attack;
+                        latestEvent += $"you hit the monster for {player.Attack} hp\n";
+                    }
+                    damageDone += player.Attack;
+                    damageTaken += monster.Attack;
+
+                }
+                else
+                {
+                    monster.Health -= player.Attack;
+                    latestEvent += $"You hit the monster for {player.Attack} hp.";
+                    if (monster.IsAlive)
+                    {
+                        player.Health -= monster.Attack;
+                        latestEvent += $" The monster hit you for {monster.Attack} hp.";
+                    }
+                    damageDone += player.Attack;
+                    damageTaken += monster.Attack;
+                }
+
+            } while (monster.IsAlive && player.IsAlive);
+            if (player.IsAlive)
+            {
+                latestEvent += $"\nYou beat the monster! You suffered {damageTaken} damage and dealt {damageDone} in return!";
+            }
+
+        }
+
         private void DisplayStats()
         {
-            Console.WriteLine($"Health: {player.Health}");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"{player.Name}: Health: {player.Health} Attack: {player.Attack}\nWeight/Max weight : {player.Weight}/{player.MaxWeight}");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private void AskForMovement()
@@ -83,7 +141,7 @@ namespace DungeonsOfDoom
             int foodCount = 0;
             foreach (var item in player.Inventory)
             {
-                if (item.Type == "food")
+                if (item.Type == "consumable")
                 {
                     foodCount++;
                 }
@@ -92,7 +150,7 @@ namespace DungeonsOfDoom
                     weaponCount++;
                 }
             }
-            Console.WriteLine($"You have {foodCount} apples and {weaponCount} swords! ");
+            Console.WriteLine($"You have {foodCount} apple(s) and {weaponCount} sword(s)! ");
             Console.ReadKey(true);
         }
 
@@ -100,17 +158,18 @@ namespace DungeonsOfDoom
         {
             foreach (Item item in player.Inventory)
             {
-                if (item.Type == "food")
+                if (item.Type == "consumable")
                 {
-                    player.Health += 20;
+                    player.Health += item.Power;
                     player.Inventory.Remove(item);
+                    player.Weight -= item.Weight;
                     break;
                 }
 
             }
         }
 
-        private void DisplayWord()
+        private void DisplayWorld()
         {
             for (int y = 0; y < world.GetLength(1); y++)
             {
@@ -121,27 +180,28 @@ namespace DungeonsOfDoom
                     if (player.X == x && player.Y == y)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write(" P ");
+                        Console.Write($" {player.Icon} ");
                     }
                     else if (room.Monster != null)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" M ");
+                        Console.Write($" {room.Monster.Icon} ");
                     }
                     else if (room.Item != null)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(" I ");
+                        Console.Write($" {room.Item.Icon} ");
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.Write(" . ");
                     }
-
                 }
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
             }
+            Console.WriteLine(latestEvent);
         }
 
         private void GameOver()
@@ -167,18 +227,12 @@ namespace DungeonsOfDoom
 
                         if (random.Next(0, 100) < 10)
                         {
-                            world[x, y].Monster = new Monster(30);
+                            world[x, y].Monster = new Monster("Monster", 'M', 10, random.Next(1, 10));
                         }
 
                         if (random.Next(0, 100) < 10)
                         {
-                            if (random.Next(0, 10) % 2 == 0)
-                            {
-                                world[x, y].Item = new Item("Sword", 10, "weapon");
-                            }
-                            else
-                                world[x, y].Item = new Item("Apple", 2, "food");
-
+                            world[x, y].Item = Item.GenerateItem();
                         }
                     }
                 }
@@ -187,7 +241,7 @@ namespace DungeonsOfDoom
 
         private void CreatePLayer()
         {
-            player = new Player(100, 0, 0, 50);
+            player = new Player("Player", 'P', 100, 5, 0, 0, 50);
         }
     }
 }
