@@ -120,19 +120,23 @@ namespace DungeonsOfDoom
 
                     if (player.X == x && player.Y == y)
                     {
-                        Console.Write("P");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(" P ");
                     }
                     else if (room.Monster != null)
                     {
-                        Console.Write("M");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" M ");
                     }
                     else if (room.Item != null)
                     {
-                        Console.Write("I");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(" I ");
                     }
                     else
                     {
-                        Console.Write(".");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write(" . ");
                     }
 
                 }
