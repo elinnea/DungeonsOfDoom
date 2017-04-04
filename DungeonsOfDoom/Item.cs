@@ -8,13 +8,15 @@ namespace DungeonsOfDoom
 {
     class Item
     {
-        public Item(string name, int weight)
+        public Item(string name, int weight, string type)
         {
             Name = name;
             Weight = weight;
+            Type = type;
         }
 
         public string Name { get; set; }
         public int Weight { get; set; }
+        public string Type { get; set; }
     }
 }
