@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    class Organism : GameObject
+    abstract class Organism : GameObject
     {
         public Organism(string name, char icon, int health, int attack) : base(name, icon)
         {

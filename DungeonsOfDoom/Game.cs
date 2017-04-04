@@ -52,7 +52,7 @@ namespace DungeonsOfDoom
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
             {
                 player.Inventory.Add(tempRoom.Item);
-                if (tempRoom.Item.Type == "weapon")
+                if (tempRoom.Item is Weapon)
                 {
                     player.Attack += tempRoom.Item.Power;
                 }
@@ -140,20 +140,10 @@ namespace DungeonsOfDoom
 
         private void ShowInventory()
         {
-            int weaponCount = 0;
-            int foodCount = 0;
             foreach (var item in player.Inventory)
             {
-                if (item.Type == "consumable")
-                {
-                    foodCount++;
-                }
-                else
-                {
-                    weaponCount++;
-                }
+                Console.WriteLine(item.ToString()); 
             }
-            Console.WriteLine($"You have {foodCount} apple(s) and {weaponCount} sword(s)! ");
             Console.ReadKey(true);
         }
 
@@ -161,7 +151,7 @@ namespace DungeonsOfDoom
         {
             foreach (Item item in player.Inventory)
             {
-                if (item.Type == "consumable")
+                if (item is Consumable)
                 {
                     player.Health += item.Power;
                     player.Inventory.Remove(item);

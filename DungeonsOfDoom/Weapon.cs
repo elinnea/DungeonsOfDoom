@@ -8,9 +8,9 @@ namespace DungeonsOfDoom
 {
     class Weapon : Item
     {
-        public Weapon(string name, char icon, int weight, int power, string type) : base(name, icon, weight, power)
+        public Weapon(string name, char icon, int weight, int power) : base(name, icon, weight, power)
         {
-            Type = type;
+
         }
 
     }
