@@ -22,12 +22,12 @@ namespace DungeonsOfDoom
         public static Item GenerateItem()
         {
             Item item;
-            if (RandomUtils.Randomize(1, 30) % 3 == 0)
+            if (RandomUtils.Percent(30))
             {
-                item = new Weapon("Sword", '?', RandomUtils.Randomize(2, 7), RandomUtils.Randomize(2, 6));
+                item = new Weapon("Sword", '?', RandomUtils.Number(2, 7), RandomUtils.Number(2, 6));
             }
             else
-                item = new Consumable("Apple", '?', 1, RandomUtils.Randomize(5, 21));
+                item = new Consumable("Apple", '?', 1, RandomUtils.Number(5, 21));
             return item;
         }
 

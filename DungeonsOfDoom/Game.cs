@@ -23,8 +23,8 @@ namespace DungeonsOfDoom
         {
             player = Player.CreatePlayer();
             CreateWorld();
-            //TextUtils.AnimateText("WELCOME TO THE DUNGEONS OF DOOM", 100);
-            //Thread.Sleep(1000);
+            TextUtils.AnimateText("WELCOME TO THE DUNGEONS OF DOOM", 100);
+            Thread.Sleep(1000);
 
             Console.Clear();
             DisplayWorld();
@@ -80,23 +80,19 @@ namespace DungeonsOfDoom
             int playerHealth = player.Health, monsterHealth = monster.Health;
             do
             {
-                if (RandomUtils.Randomize(0, 10) % 2 == 0)
+                if (RandomUtils.Percent(50))
                 {
-                    //player.Health -= monster.Strength;
                     latestEvent += monster.Attack(player);
                     if (player.IsAlive)
                     {
-                        //monster.Health -= player.Strength;
                         latestEvent += player.Attack(monster);
                     }
                 }
                 else
                 {
-                    //monster.Health -= player.Strength;
                     latestEvent += player.Attack(monster);
                     if (monster.IsAlive)
                     {
-                        //player.Health -= monster.Strength;
                         latestEvent += monster.Attack(player);
 
                     }
@@ -328,12 +324,12 @@ namespace DungeonsOfDoom
 
                     if (player.X != x || player.Y != y)
                     {
-                        if (RandomUtils.Randomize(0, 100) < 10)
+                        if (RandomUtils.Percent(10))
                         {
                             world[x, y].Monster = Monster.GenerateMonster();
                         }
 
-                        if (RandomUtils.Randomize(0, 100) < 10)
+                        if (RandomUtils.Percent(10))
                         {
                             if (world[x, y].Monster != null)
                             {

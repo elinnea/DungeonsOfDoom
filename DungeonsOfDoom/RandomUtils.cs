@@ -8,13 +8,15 @@ namespace DungeonsOfDoom
 {
     static class RandomUtils
     {
-        static Random r;
-        static RandomUtils() { r = new Random(); }
-        public static int Randomize(int min, int max)
+        static Random r = new Random();
+        public static int Number(int min, int max)
         {
-            int temp;
-            temp = r.Next(min, max + 1);
-            return temp;
+            return r.Next(min, max + 1);
+        }
+
+        public static bool Percent(int percent)
+        {
+            return Number(0,100) < percent;
         }
     }
 }
