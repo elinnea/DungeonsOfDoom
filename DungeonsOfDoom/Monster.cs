@@ -8,7 +8,7 @@ namespace DungeonsOfDoom
 {
     class Monster : Organism
     {
-        static Random rnd = new Random();
+        protected static Random rnd = new Random();
 
         public Monster(string name, char icon, int health, int attack) : base(name, icon, health, attack) 
         {
