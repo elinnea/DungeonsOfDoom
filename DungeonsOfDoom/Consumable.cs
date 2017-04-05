@@ -12,10 +12,17 @@ namespace DungeonsOfDoom
         {
         }
 
+        public override string PickUpItem(Organism organism)
+        {
+            organism.Inventory.Add(this);
+            return $"Item {Name} with a power of {Power} was added to backpack. ";
+        }
+
         public override string UseItem(Organism user)
         {
             user.Health += Power;
-            return $"Item {Name} was consumed. {user.Name} gained {Power} health. ";
+            //user.Inventory.Remove(this);
+            return $"Ate an {Name} and gained {Power} health.";
         }
     }
 }

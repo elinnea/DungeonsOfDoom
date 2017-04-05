@@ -11,14 +11,21 @@ namespace DungeonsOfDoom
     {
         Player player;
         Room[,] world;
-        Random random = new Random(); //Använd samma instans av random för att slippa att alltid få samma slumptal, pga random baseras på tidsstämpel
+        readonly int sizeX, sizeY;
         string latestEvent;
         int newX = 0, newY = 0, oldX = 0, oldY = 0, oldPlayerX = 0;
-
+        public Game()
+        {
+            sizeX = 30;
+            sizeY = 10;
+        }
         public void Play()
         {
             player = Player.CreatePlayer();
             CreateWorld();
+            TextUtils.AnimateText("WELCOME TO THE DUNGEONS OF DOOM", 100);
+            Thread.Sleep(1000);
+
             Console.Clear();
             DisplayWorld();
 
@@ -72,13 +79,8 @@ namespace DungeonsOfDoom
             }
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
             {
-                player.Inventory.Add(tempRoom.Item);
-                if (tempRoom.Item is Weapon)
-                {
-                    player.Strength += tempRoom.Item.Power;
-                }
+                latestEvent = tempRoom.Item.PickUpItem(player);
                 player.Weight += tempRoom.Item.Weight;
-                latestEvent = $"Item picked up: {tempRoom.Item.Name}\nItem power: {tempRoom.Item.Power}";
                 tempRoom.Item = null;
             }
 
@@ -97,23 +99,19 @@ namespace DungeonsOfDoom
             int playerHealth = player.Health, monsterHealth = monster.Health;
             do
             {
-                if (random.Next(0, 10) % 2 == 0)
+                if (RandomUtils.Percent(50))
                 {
-                    //player.Health -= monster.Strength;
                     latestEvent += monster.Attack(player);
                     if (player.IsAlive)
                     {
-                        //monster.Health -= player.Strength;
                         latestEvent += player.Attack(monster);
                     }
                 }
                 else
                 {
-                    //monster.Health -= player.Strength;
                     latestEvent += player.Attack(monster);
                     if (monster.IsAlive)
                     {
-                        //player.Health -= monster.Strength;
                         latestEvent += monster.Attack(player);
 
                     }
@@ -216,7 +214,19 @@ namespace DungeonsOfDoom
                 case ConsoleKey.LeftArrow: newX--; break;
                 case ConsoleKey.UpArrow: newY--; break;
                 case ConsoleKey.DownArrow: newY++; break;
-                case ConsoleKey.Spacebar: Eat(); isValidMove = false; break;
+                case ConsoleKey.Spacebar:
+
+                    {
+                        //    foreach (var item in player.Inventory)
+                        //    {
+                        //        if(item is Consumable)
+                        //        item.UseItem(player);
+                        //        player.Inventory.Remove(item);
+                        //    }
+                        Eat();
+                        isValidMove = false;
+                        break;
+                    }
                 case ConsoleKey.I: ShowInventory(); isValidMove = false; break;
                 default: isValidMove = false; break;
             }
@@ -300,7 +310,8 @@ namespace DungeonsOfDoom
         {
 
             Console.Clear();
-            TextUtils.AnimateText("Game over...", 100);
+            TextUtils.AnimateText("GAME OVER", 100);
+            Console.WriteLine();
             Thread.Sleep(1000);
             Console.WriteLine("Play again? Y/N");
 
@@ -324,7 +335,7 @@ namespace DungeonsOfDoom
 
         private void CreateWorld()
         {
-            world = new Room[30, 10];
+            world = new Room[sizeX, sizeY];
 
             for (int y = 0; y < world.GetLength(1); y++)
             {
@@ -334,13 +345,12 @@ namespace DungeonsOfDoom
 
                     if (player.X != x || player.Y != y)
                     {
-
-                        if (random.Next(0, 100) < 15)
+                        if (RandomUtils.Percent(10))
                         {
                             world[x, y].Monster = Monster.GenerateMonster();
                         }
 
-                        if (random.Next(0, 100) < 10)
+                        if (RandomUtils.Percent(10))
                         {
                             if (world[x, y].Monster != null)
                             {

@@ -16,17 +16,18 @@ namespace DungeonsOfDoom
         }
         public int Power { get; protected set; }
         public int Weight { get; private set; }
-        
+
+        public abstract string PickUpItem(Organism organism);
 
         public static Item GenerateItem()
         {
             Item item;
-            if (rnd.Next(0, 30) % 3 == 0)
+            if (RandomUtils.Percent(30))
             {
-                item = new Weapon("Sword", '?', rnd.Next(2, 7), rnd.Next(2, 6));
+                item = new Weapon("Sword", '?', RandomUtils.Number(2, 7), RandomUtils.Number(2, 6));
             }
             else
-                item = new Consumable("Apple", '?', 1, rnd.Next(5, 21));
+                item = new Consumable("Apple", '?', 1, RandomUtils.Number(5, 21));
             return item;
         }
 

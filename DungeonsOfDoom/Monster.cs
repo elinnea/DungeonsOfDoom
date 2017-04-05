@@ -8,13 +8,12 @@ namespace DungeonsOfDoom
 {
     abstract class Monster : Organism
     {
-        protected static Random rnd = new Random();
         protected string[] messages;
         public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
         {
-            if (rnd.Next(0,101) < 10) 
+            if (RandomUtils.Percent(10)) 
             {
-                Inventory.Add(Item.GenerateItem());
+                Item.GenerateItem().PickUpItem(this);
             }
             MonsterCount++;
         }
@@ -23,7 +22,7 @@ namespace DungeonsOfDoom
 
         public static Monster GenerateMonster()
         {
-            switch (rnd.Next(0,3))
+            switch (RandomUtils.Number(0,2))
             {
                 case 0:
                     return new Heffaklump();
