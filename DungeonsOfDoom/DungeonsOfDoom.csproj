@@ -46,6 +46,7 @@
     <Compile Include="Consumable.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Heffaklump.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Organism.cs" />
@@ -53,7 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
-    <Compile Include="Toucan.cs" />
+    <Compile Include="RubberDuck.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
