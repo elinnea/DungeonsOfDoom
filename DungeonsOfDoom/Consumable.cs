@@ -11,5 +11,11 @@ namespace DungeonsOfDoom
         public Consumable(string name, char icon, int weight, int power) : base(name, icon, weight, power)
         {
         }
+
+        public override string UseItem(Organism user)
+        {
+            user.Health += Power;
+            return $"Item {Name} was consumed. {user.Name} gained {Power} health. ";
+        }
     }
 }

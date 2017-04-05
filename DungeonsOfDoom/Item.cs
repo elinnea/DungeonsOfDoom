@@ -34,5 +34,7 @@ namespace DungeonsOfDoom
         {
             return $"{Name}, power: {Power}, weight: {Weight}";
         }
+
+        public abstract string UseItem(Organism user);
     }
 }

@@ -13,16 +13,11 @@ namespace DungeonsOfDoom
 
         }
 
-        //TODO skapa metod för WeaponDurability
-        static public void WeaponDurability(Player player)
+
+        public override string UseItem(Organism user)
         {
-            foreach (Item item in player.Inventory)
-            {
-                if (item is Weapon && item.Power > 0)
-                {
-                    
-                }
-            }
+            Power -= 1;
+            return $"{user.Name} used item {Name}. The weapon is worn and loses 1 strength.";
         }
     }
 }

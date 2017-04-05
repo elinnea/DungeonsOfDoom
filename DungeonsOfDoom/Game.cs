@@ -169,7 +169,7 @@ namespace DungeonsOfDoom
 
         private void ClearLog()
         {
-            for (int i = 11; i < 20; i++)
+            for (int i = 11; i < 26; i++)
             {
                 Console.SetCursorPosition(0, i);
                 Console.WriteLine("                                                                                                                                 ");
@@ -224,7 +224,6 @@ namespace DungeonsOfDoom
             {
                 Console.WriteLine($"{ind++}: {item.ToString()}");
             }
-            Weapon.WeaponDurability(player);
             Console.ReadKey(true);
             Console.Clear();
             DisplayWorld();

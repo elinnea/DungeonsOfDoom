@@ -9,12 +9,12 @@ namespace DungeonsOfDoom
     class RubberDuck : Monster
     {
         //static Random rnd = new Random();
-        public RubberDuck() : base("Rupert", 'M', rnd.Next(15,26), rnd.Next(5,11))
+        public RubberDuck() : base("Rupert the Rubber Duck", 'M', rnd.Next(15,26), rnd.Next(5,11))
         {
             messages = new string[3];
-            messages[0] = "{0} the Rubber Duck squirts water at {1}! {2} lose {3} hp. ";
-            messages[1] = "{0} the Rubber Duck floats into {1}! {2} lose {3} hp. ";
-            messages[2] = "{0} the Rubber Duck pecks at {1}! {2} lose {3} hp. ";
+            messages[0] = "{0} squirts water at {1}! {2} lose {3} hp. ";
+            messages[1] = "{0} floats into {1}! {2} lose {3} hp. ";
+            messages[2] = "{0} pecks at {1}! {2} lose {3} hp. ";
 
         }
 
@@ -35,7 +35,7 @@ namespace DungeonsOfDoom
                     break;
 
             }
-            return attackString;
+            return attackString + "\n";
         }
 
     }

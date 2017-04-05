@@ -25,7 +25,8 @@ namespace DungeonsOfDoom
         public override string Attack(Organism opponent)
         {
             opponent.Health -= Strength;
-            return $"{Name} hit {opponent.Name} for {Strength} hp!";
+            return $"{Name} hit {opponent.Name} for {Strength} hp!\n";
+
         }
     }
 }

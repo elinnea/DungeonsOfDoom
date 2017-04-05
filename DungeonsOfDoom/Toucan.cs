@@ -20,7 +20,7 @@ namespace DungeonsOfDoom
         public override string Attack(Organism opponent)
         {
             opponent.Health -= Strength;
-            return messages[rnd.Next(0,3)];
+            return messages[rnd.Next(0,3)] + "\n";
         }
 
 
