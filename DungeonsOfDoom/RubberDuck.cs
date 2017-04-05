@@ -12,9 +12,9 @@ namespace DungeonsOfDoom
         public RubberDuck() : base("Rupert", 'M', 10, 6)
         {
             messages = new string[3];
-            messages[0] = "{0} the Rubber Duck squirts water at {1}! {2} lose {3} hp.";
-            messages[1] = "{0} the Rubber Duck floats into {1}! {2} lose {3} hp.";
-            messages[2] = "{0} the Rubber Duck pecks at {1}! {2} lose {3} hp.";
+            messages[0] = "{0} the Rubber Duck squirts water at {1}! {2} lose {3} hp. ";
+            messages[1] = "{0} the Rubber Duck floats into {1}! {2} lose {3} hp. ";
+            messages[2] = "{0} the Rubber Duck pecks at {1}! {2} lose {3} hp. ";
 
         }
 

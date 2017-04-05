@@ -22,6 +22,12 @@ namespace DungeonsOfDoom
         public int Weight { get; set; }
         public int MaxWeight { get; private set; }
 
+
+        public static Player CreatePlayer()
+        {
+            return new Player("Player", 'P', 100, 5, 0, 0, 50);
+        }
+
         public override string Attack(Organism opponent)
         {
             opponent.Health -= Strength;
