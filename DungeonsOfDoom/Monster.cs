@@ -16,8 +16,11 @@ namespace DungeonsOfDoom
             {
                 Inventory.Add(Item.GenerateItem());
             }
+            MonsterCount++;
         }
-        
+
+        public static int MonsterCount { get; set; }
+
         public static Monster GenerateMonster()
         {
             switch (rnd.Next(0,3))

@@ -26,11 +26,20 @@ namespace DungeonsOfDoom
             {
                 AskForMovement();
                 DisplayStats();
+                if (Monster.MonsterCount == 0)
+                {
+                    GameWon();
+                    break;
+                }
                 //CheckRoom();
 
-            } while (player.Health > 0);
+            } while (player.IsAlive);
 
-            GameOver();
+            if (!player.IsAlive)
+            {
+                GameOver();
+            }
+
         }
 
         private void CheckRoom()
@@ -58,7 +67,7 @@ namespace DungeonsOfDoom
                     }
                 }
                 tempRoom.Monster = null;
-
+                Monster.MonsterCount--;
 
             }
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
@@ -72,6 +81,15 @@ namespace DungeonsOfDoom
                 latestEvent = $"Item picked up: {tempRoom.Item.Name}\nItem power: {tempRoom.Item.Power}";
                 tempRoom.Item = null;
             }
+
+        }
+
+        private void GameWon()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(30, 15);
+            TextUtils.AnimateText("Congratulations! You clonked all monsters and won!", 70);
+            Thread.Sleep(5000);
         }
 
         private void Battle(Monster monster)
@@ -280,10 +298,13 @@ namespace DungeonsOfDoom
 
         private void GameOver()
         {
+
             Console.Clear();
-            Console.WriteLine("Game over...");
+            TextUtils.AnimateText("Game over...", 100);
+            Thread.Sleep(1000);
             Console.WriteLine("Play again? Y/N");
-           
+
+
 
             while (true)
             {
@@ -314,7 +335,7 @@ namespace DungeonsOfDoom
                     if (player.X != x || player.Y != y)
                     {
 
-                        if (random.Next(0, 100) < 10)
+                        if (random.Next(0, 100) < 15)
                         {
                             world[x, y].Monster = Monster.GenerateMonster();
                         }

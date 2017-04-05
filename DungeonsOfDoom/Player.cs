@@ -32,7 +32,6 @@ namespace DungeonsOfDoom
         {
             opponent.Health -= Strength;
             return $"{Name} hit {opponent.Name} for {Strength} hp!\n";
-
         }
     }
 }
