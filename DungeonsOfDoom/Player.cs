@@ -28,8 +28,7 @@ namespace DungeonsOfDoom
         {
             return new Player("Player", 'P', 100, 5, 0, 0, 50);
         }
-
-        //TODO förlora strength efter attack? 
+                
         public override string Attack(Organism opponent) 
         {
             opponent.Health -= Strength;

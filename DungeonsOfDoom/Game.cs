@@ -71,6 +71,7 @@ namespace DungeonsOfDoom
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
             {
                 latestEvent = tempRoom.Item.PickUpItem(player);
+                player.Weight += tempRoom.Item.Weight;
                 tempRoom.Item = null;
             }
         }
@@ -245,7 +246,7 @@ namespace DungeonsOfDoom
                 {
                     player.Health += item.Power;
                     player.Inventory.Remove(item);
-                    //player.Weight -= item.Weight;
+                    player.Weight -= item.Weight;
                     break;
                 }
 
