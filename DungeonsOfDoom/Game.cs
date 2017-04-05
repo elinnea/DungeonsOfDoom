@@ -11,7 +11,6 @@ namespace DungeonsOfDoom
     {
         Player player;
         Room[,] world;
-        Random random = new Random(); //Använd samma instans av random för att slippa att alltid få samma slumptal, pga random baseras på tidsstämpel
         string latestEvent;
         int newX = 0, newY = 0, oldX = 0, oldY = 0, oldPlayerX = 0;
 
@@ -73,7 +72,7 @@ namespace DungeonsOfDoom
             int playerHealth = player.Health, monsterHealth = monster.Health;
             do
             {
-                if (random.Next(0, 10) % 2 == 0)
+                if (RandomUtils.Randomize(0, 10) % 2 == 0)
                 {
                     //player.Health -= monster.Strength;
                     latestEvent += monster.Attack(player);
@@ -277,7 +276,7 @@ namespace DungeonsOfDoom
             Console.Clear();
             Console.WriteLine("Game over...");
             Console.WriteLine("Play again? Y/N");
-           
+
 
             while (true)
             {
@@ -308,12 +307,12 @@ namespace DungeonsOfDoom
                     if (player.X != x || player.Y != y)
                     {
 
-                        if (random.Next(0, 100) < 10)
+                        if (RandomUtils.Randomize(1, 100) < 10)
                         {
                             world[x, y].Monster = Monster.GenerateMonster();
                         }
 
-                        if (random.Next(0, 100) < 10)
+                        if (RandomUtils.Randomize(1, 100) < 10)
                         {
                             if (world[x, y].Monster != null)
                             {
