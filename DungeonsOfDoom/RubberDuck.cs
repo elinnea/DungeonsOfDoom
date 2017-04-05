@@ -22,8 +22,18 @@ namespace DungeonsOfDoom
         {
             string attackString = "";
             opponent.Health -= Strength;
-            if (rnd.Next(0,100) % 2 == 0)
+            switch(rnd.Next(0,3))
             {
+                case 0:
+                    attackString = String.Format($"{messages[0]}", Name, opponent.Name, opponent.Name, Strength);
+                    break;
+                case 1:
+                    attackString = String.Format($"{messages[1]}", Name, opponent.Name, opponent.Name, Strength/2);
+                    break;
+                case 2:
+                    attackString = String.Format($"{messages[2]}", Name, opponent.Name, opponent.Name, Strength);
+                    break;
+
             }
             return attackString;
         }
