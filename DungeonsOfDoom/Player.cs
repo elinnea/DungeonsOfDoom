@@ -21,5 +21,11 @@ namespace DungeonsOfDoom
         public int Y { get; set; }
         public int Weight { get; set; }
         public int MaxWeight { get; private set; }
+
+        public override string Attack(Organism opponent)
+        {
+            opponent.Health -= Strength;
+            return $"{Name} hit {opponent.Name} for {Strength} hp!";
+        }
     }
 }

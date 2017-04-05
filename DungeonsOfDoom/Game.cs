@@ -77,41 +77,35 @@ namespace DungeonsOfDoom
 
         private void Battle(Monster monster)
         {
-            int damageTaken = 0, damageDone = 0;
+            int playerHealth = player.Health, monsterHealth = monster.Health;
             do
             {
                 if (random.Next(0, 10) % 2 == 0)
                 {
-                    player.Health -= monster.Strength;
-                    latestEvent += $"\nThe monster hit you for {monster.Strength} hp.";
+                    //player.Health -= monster.Strength;
+                    latestEvent += monster.Attack(player);
                     if (player.IsAlive)
                     {
-                        monster.Health -= player.Strength;
-                        latestEvent += $" You hit the monster for {player.Strength} hp";
-                        damageDone += player.Strength;
-
+                        //monster.Health -= player.Strength;
+                        latestEvent += player.Attack(monster);
                     }
-                    damageTaken += monster.Strength;
-
                 }
                 else
                 {
-                    monster.Health -= player.Strength;
-                    latestEvent += $"\nYou hit the monster for {player.Strength} hp.";
+                    //monster.Health -= player.Strength;
+                    latestEvent += player.Attack(monster);
                     if (monster.IsAlive)
                     {
-                        player.Health -= monster.Strength;
-                        latestEvent += $" The monster hit you for {monster.Strength} hp.";
-                        damageTaken += monster.Strength;
+                        //player.Health -= monster.Strength;
+                        latestEvent += monster.Attack(player);
+                       
                     }
-                    damageDone += player.Strength;
-
                 }
 
             } while (monster.IsAlive && player.IsAlive);
             if (player.IsAlive)
             {
-                latestEvent += $"\nYou beat the monster! You suffered {damageTaken} damage and dealt {damageDone} in return!";
+                latestEvent += $"\nYou beat the monster! You suffered {playerHealth - player.Health} damage and dealt {monsterHealth - monster.Health} in return!";
             }
 
         }
