@@ -279,6 +279,7 @@ namespace DungeonsOfDoom
         {
             Console.Clear();
             TextUtils.AnimateText("GAME OVER", 100);
+            Console.WriteLine();
             Thread.Sleep(1000);
             Console.WriteLine("Play again? Y/N");
            
