@@ -9,7 +9,7 @@ namespace DungeonsOfDoom
     abstract class Monster : Organism
     {
         protected static Random rnd = new Random();
-
+        
         public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
         {
             if (rnd.Next(0,101) < 10) 
@@ -28,9 +28,8 @@ namespace DungeonsOfDoom
                     return new Toucan();
                 case 2:
                     return new RubberDuck();
-                default:
-                    break;
             }
+            return null;
         }
     }
 }
