@@ -18,9 +18,9 @@ namespace DungeonsOfDoom
         {
             foreach (Item item in player.Inventory)
             {
-                if (item is Weapon)
+                if (item is Weapon && item.Power > 0)
                 {
-                    Console.WriteLine(item.ToString());
+                    
                 }
             }
         }

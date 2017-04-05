@@ -67,7 +67,7 @@ namespace DungeonsOfDoom
                 player.Inventory.Add(tempRoom.Item);
                 if (tempRoom.Item is Weapon)
                 {
-                    player.Attack += tempRoom.Item.Power;
+                    player.Strength += tempRoom.Item.Power;
                 }
                 player.Weight += tempRoom.Item.Weight;
                 latestEvent = $"Item picked up: {tempRoom.Item.Name}\nItem power: {tempRoom.Item.Power}";
@@ -82,29 +82,29 @@ namespace DungeonsOfDoom
             {
                 if (random.Next(0, 10) % 2 == 0)
                 {
-                    player.Health -= monster.Attack;
-                    latestEvent += $"\nThe monster hit you for {monster.Attack} hp.";
+                    player.Health -= monster.Strength;
+                    latestEvent += $"\nThe monster hit you for {monster.Strength} hp.";
                     if (player.IsAlive)
                     {
-                        monster.Health -= player.Attack;
-                        latestEvent += $" You hit the monster for {player.Attack} hp";
-                        damageDone += player.Attack;
+                        monster.Health -= player.Strength;
+                        latestEvent += $" You hit the monster for {player.Strength} hp";
+                        damageDone += player.Strength;
 
                     }
-                    damageTaken += monster.Attack;
+                    damageTaken += monster.Strength;
 
                 }
                 else
                 {
-                    monster.Health -= player.Attack;
-                    latestEvent += $"\nYou hit the monster for {player.Attack} hp.";
+                    monster.Health -= player.Strength;
+                    latestEvent += $"\nYou hit the monster for {player.Strength} hp.";
                     if (monster.IsAlive)
                     {
-                        player.Health -= monster.Attack;
-                        latestEvent += $" The monster hit you for {monster.Attack} hp.";
-                        damageTaken += monster.Attack;
+                        player.Health -= monster.Strength;
+                        latestEvent += $" The monster hit you for {monster.Strength} hp.";
+                        damageTaken += monster.Strength;
                     }
-                    damageDone += player.Attack;
+                    damageDone += player.Strength;
 
                 }
 
@@ -187,7 +187,7 @@ namespace DungeonsOfDoom
             ClearLog();
             Console.SetCursorPosition(0, 11);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{player.Name}: Health: {player.Health} Attack: {player.Attack}\nWeight/Max weight : {player.Weight}/{player.MaxWeight}");
+            Console.WriteLine($"{player.Name}: Health: {player.Health} Attack: {player.Strength}\nWeight/Max weight : {player.Weight}/{player.MaxWeight}");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(latestEvent);
         }

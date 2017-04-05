@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    class Monster : Organism
+    abstract class Monster : Organism
     {
         static Random rnd = new Random();
 
-        public Monster(string name, char icon, int health, int attack) : base(name, icon, health, attack) 
+        public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
         {
             if (rnd.Next(0,101) < 100) 
             {
                 Inventory.Add(Item.GenerateItem());
             }
         }
+
+       
 
         public static Monster GenerateMonster()
         {
