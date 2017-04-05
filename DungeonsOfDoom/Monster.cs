@@ -22,6 +22,8 @@ namespace DungeonsOfDoom
 
         public static Monster GenerateMonster()
         {
+            //REFLECTION
+
             return new Monster("Monster", 'M', 10, rnd.Next(1, 10));
         }
     }
