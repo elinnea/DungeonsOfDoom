@@ -17,12 +17,20 @@ namespace DungeonsOfDoom
                 Inventory.Add(Item.GenerateItem());
             }
         }
-
-       
-
+        
         public static Monster GenerateMonster()
         {
-            return new Monster("Monster", 'M', 10, rnd.Next(1, 10));
+            switch (rnd.Next(0,3))
+            {
+                case 0:
+                    return new Heffaklump();
+                case 1:
+                    return new Toucan();
+                case 2:
+                    return new RubberDuck();
+                default:
+                    break;
+            }
         }
     }
 }
