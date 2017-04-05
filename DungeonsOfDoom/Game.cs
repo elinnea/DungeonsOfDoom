@@ -11,9 +11,14 @@ namespace DungeonsOfDoom
     {
         Player player;
         Room[,] world;
+        readonly int sizeX, sizeY;
         string latestEvent;
         int newX = 0, newY = 0, oldX = 0, oldY = 0, oldPlayerX = 0;
-
+        public Game()
+        {
+            sizeX = 30;
+            sizeY = 10;
+        }
         public void Play()
         {
             player = Player.CreatePlayer();
@@ -300,7 +305,7 @@ namespace DungeonsOfDoom
 
         private void CreateWorld()
         {
-            world = new Room[30, 10];
+            world = new Room[sizeX, sizeY];
 
             for (int y = 0; y < world.GetLength(1); y++)
             {
@@ -310,7 +315,6 @@ namespace DungeonsOfDoom
 
                     if (player.X != x || player.Y != y)
                     {
-                        Console.WriteLine(RandomUtils.Randomize(0, 100)); 
                         if (RandomUtils.Randomize(0, 100) < 10)
                         {
                             world[x, y].Monster = Monster.GenerateMonster();
