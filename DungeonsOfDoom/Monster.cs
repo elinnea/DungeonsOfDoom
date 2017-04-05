@@ -12,7 +12,7 @@ namespace DungeonsOfDoom
 
         public Monster(string name, char icon, int health, int attack) : base(name, icon, health, attack) 
         {
-            if (rnd.Next(0,101) < 100) 
+            if (rnd.Next(0,101) < 10) 
             {
                 Inventory.Add(Item.GenerateItem());
             }
