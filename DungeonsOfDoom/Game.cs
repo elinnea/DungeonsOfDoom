@@ -178,7 +178,7 @@ namespace DungeonsOfDoom
             for (int i = 11; i < 20; i++)
             {
                 Console.SetCursorPosition(0, i);
-                Console.WriteLine("                                                                                                      ");
+                Console.WriteLine("                                                                                                                                 ");
             }
         }
 
@@ -224,12 +224,16 @@ namespace DungeonsOfDoom
 
         private void ShowInventory()
         {
+            Console.Clear();
+            int ind = 0;
             foreach (var item in player.Inventory)
             {
-                Console.WriteLine(item.ToString());
+                Console.WriteLine($"{ind++}: {item.ToString()}");
             }
             Weapon.WeaponDurability(player);
             Console.ReadKey(true);
+            Console.Clear();
+            DisplayWorld();
         }
 
         private void Eat()

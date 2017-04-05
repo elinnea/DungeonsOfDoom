@@ -8,11 +8,11 @@ namespace DungeonsOfDoom
 {
     abstract class Monster : Organism
     {
-        static Random rnd = new Random();
+        protected static Random rnd = new Random();
 
         public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
         {
-            if (rnd.Next(0,101) < 100) 
+            if (rnd.Next(0,101) < 10) 
             {
                 Inventory.Add(Item.GenerateItem());
             }
