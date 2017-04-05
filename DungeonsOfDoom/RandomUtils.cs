@@ -8,10 +8,13 @@ namespace DungeonsOfDoom
 {
     static class RandomUtils
     {
+        static Random r;
+        static RandomUtils() { r = new Random(); }
         public static int Randomize(int min, int max)
         {
-            Random r = new Random();
-            return r.Next(min, max + 1);
+            int temp;
+            temp = r.Next(min, max + 1);
+            return temp;
         }
     }
 }

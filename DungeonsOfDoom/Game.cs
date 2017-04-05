@@ -306,13 +306,13 @@ namespace DungeonsOfDoom
 
                     if (player.X != x || player.Y != y)
                     {
-
-                        if (RandomUtils.Randomize(1, 100) < 10)
+                        Console.WriteLine(RandomUtils.Randomize(0, 100)); 
+                        if (RandomUtils.Randomize(0, 100) < 10)
                         {
                             world[x, y].Monster = Monster.GenerateMonster();
                         }
 
-                        if (RandomUtils.Randomize(1, 100) < 10)
+                        if (RandomUtils.Randomize(0, 100) < 10)
                         {
                             if (world[x, y].Monster != null)
                             {
