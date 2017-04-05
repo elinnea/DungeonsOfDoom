@@ -18,6 +18,9 @@ namespace DungeonsOfDoom
         {
             player = Player.CreatePlayer();
             CreateWorld();
+            //TextUtils.AnimateText("WELCOME TO THE DUNGEONS OF DOOM", 100);
+            //Thread.Sleep(1000);
+
             Console.Clear();
             DisplayWorld();
 
@@ -274,7 +277,8 @@ namespace DungeonsOfDoom
         private void GameOver()
         {
             Console.Clear();
-            Console.WriteLine("Game over...");
+            TextUtils.AnimateText("GAME OVER", 100);
+            Thread.Sleep(1000);
             Console.WriteLine("Play again? Y/N");
 
 
