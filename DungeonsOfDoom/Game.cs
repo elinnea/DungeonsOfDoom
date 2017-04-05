@@ -63,13 +63,7 @@ namespace DungeonsOfDoom
             }
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
             {
-                player.Inventory.Add(tempRoom.Item);
-                if (tempRoom.Item is Weapon)
-                {
-                    player.Strength += tempRoom.Item.Power;
-                }
-                player.Weight += tempRoom.Item.Weight;
-                latestEvent = $"Item picked up: {tempRoom.Item.Name}\nItem power: {tempRoom.Item.Power}";
+                latestEvent = tempRoom.Item.PickUpItem(player);
                 tempRoom.Item = null;
             }
         }

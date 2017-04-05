@@ -12,6 +12,12 @@ namespace DungeonsOfDoom
         {
         }
 
+        public override string PickUpItem(Organism organism)
+        {
+            organism.Health += Power;
+            return $"{organism.Name} ate an {Name} and gained {Power} health.";
+        }
+
         public override string UseItem(Organism user)
         {
             user.Health += Power;

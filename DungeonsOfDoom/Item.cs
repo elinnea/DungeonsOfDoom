@@ -16,7 +16,8 @@ namespace DungeonsOfDoom
         }
         public int Power { get; protected set; }
         public int Weight { get; private set; }
-        
+
+        public abstract string PickUpItem(Organism organism);
 
         public static Item GenerateItem()
         {
