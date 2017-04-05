@@ -19,7 +19,6 @@ namespace DungeonsOfDoom
 
         public override string Attack(Organism opponent)
         {
-            base.Attack(opponent);
             return messages[rnd.Next(0,3)];
         }
 
