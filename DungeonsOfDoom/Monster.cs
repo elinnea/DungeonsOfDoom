@@ -13,7 +13,7 @@ namespace DungeonsOfDoom
         {
             if (RandomUtils.Randomize(0,100) < 10) 
             {
-                Inventory.Add(Item.GenerateItem());
+                Item.GenerateItem().PickUpItem(this);
             }
         }
         
