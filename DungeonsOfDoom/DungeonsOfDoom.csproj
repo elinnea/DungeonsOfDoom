@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="RubberDuck.cs" />
+    <Compile Include="TextUtils.cs" />
     <Compile Include="Toucan.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>

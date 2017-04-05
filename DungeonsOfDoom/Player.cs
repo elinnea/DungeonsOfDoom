@@ -8,6 +8,7 @@ namespace DungeonsOfDoom
 {
     class Player : Organism
     {
+        //TODO max health? 
         
         public Player(string name, char icon, int health, int attack, int x, int y, int maxWeight) : base(name, icon, health, attack) //Constructor sätter klassens state
         {
@@ -28,11 +29,14 @@ namespace DungeonsOfDoom
             return new Player("Player", 'P', 100, 5, 0, 0, 50);
         }
 
-        public override string Attack(Organism opponent)
+        //TODO förlora strength efter attack? 
+        public override string Attack(Organism opponent) 
         {
             opponent.Health -= Strength;
             return $"{Name} hit {opponent.Name} for {Strength} hp!\n";
 
         }
+
+        //TODO UseItem = Eat()? 
     }
 }
