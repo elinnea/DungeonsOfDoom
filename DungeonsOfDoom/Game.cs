@@ -199,7 +199,19 @@ namespace DungeonsOfDoom
                 case ConsoleKey.LeftArrow: newX--; break;
                 case ConsoleKey.UpArrow: newY--; break;
                 case ConsoleKey.DownArrow: newY++; break;
-                case ConsoleKey.Spacebar: Eat(); isValidMove = false; break;
+                case ConsoleKey.Spacebar:
+
+                    {
+                        //    foreach (var item in player.Inventory)
+                        //    {
+                        //        if(item is Consumable)
+                        //        item.UseItem(player);
+                        //        player.Inventory.Remove(item);
+                        //    }
+                        Eat();
+                        isValidMove = false;
+                        break;
+                    }
                 case ConsoleKey.I: ShowInventory(); isValidMove = false; break;
                 default: isValidMove = false; break;
             }
@@ -237,7 +249,7 @@ namespace DungeonsOfDoom
                 {
                     player.Health += item.Power;
                     player.Inventory.Remove(item);
-                    player.Weight -= item.Weight;
+                    //player.Weight -= item.Weight;
                     break;
                 }
 
