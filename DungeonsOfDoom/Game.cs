@@ -17,14 +17,13 @@ namespace DungeonsOfDoom
 
         public void Play()
         {
-            CreatePLayer();
+            player = Player.CreatePlayer();
             CreateWorld();
             Console.Clear();
             DisplayWorld();
+
             do
             {
-                //Console.Clear();
-                //DisplayWorld();
                 AskForMovement();
                 DisplayStats();
                 //CheckRoom();
@@ -98,7 +97,7 @@ namespace DungeonsOfDoom
                     {
                         //player.Health -= monster.Strength;
                         latestEvent += monster.Attack(player);
-                       
+
                     }
                 }
 
@@ -283,8 +282,23 @@ namespace DungeonsOfDoom
         {
             Console.Clear();
             Console.WriteLine("Game over...");
-            Console.ReadKey();
-            Play();
+            Console.WriteLine("Play again? Y/N");
+           
+
+            while (true)
+            {
+                ConsoleKeyInfo input = Console.ReadKey(true);
+
+                if (input.Key == ConsoleKey.Y)
+                {
+                    Play();
+                }
+                else if (input.Key == ConsoleKey.N)
+                {
+                    Environment.Exit(0);
+                }
+            }
+
         }
 
         private void CreateWorld()
@@ -321,9 +335,5 @@ namespace DungeonsOfDoom
             }
         }
 
-        private void CreatePLayer()
-        {
-            player = new Player("Player", 'P', 100, 5, 0, 0, 50);
-        }
     }
 }
