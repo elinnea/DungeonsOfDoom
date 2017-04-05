@@ -8,7 +8,7 @@ namespace DungeonsOfDoom
 {
     abstract class Monster : Organism
     {
-        static Random rnd = new Random();
+        protected static Random rnd = new Random();
 
         public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
         {
@@ -17,14 +17,20 @@ namespace DungeonsOfDoom
                 Inventory.Add(Item.GenerateItem());
             }
         }
-
-       
-
+        
         public static Monster GenerateMonster()
         {
-            //REFLECTION
-
-            return new Monster("Monster", 'M', 10, rnd.Next(1, 10));
+            switch (rnd.Next(0,3))
+            {
+                case 0:
+                    return new Heffaklump();
+                case 1:
+                    return new Toucan();
+                case 2:
+                    return new RubberDuck();
+                default:
+                    break;
+            }
         }
     }
 }
