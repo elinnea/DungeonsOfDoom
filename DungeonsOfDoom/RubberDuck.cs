@@ -8,14 +8,24 @@ namespace DungeonsOfDoom
 {
     class RubberDuck : Monster
     {
-        public RubberDuck() : base("Rupert the", 'M', 10, 4)
+        //static Random rnd = new Random();
+        public RubberDuck() : base("Rupert", 'M', 10, 6)
         {
+            messages = new string[3];
+            messages[0] = "{0} the Rubber Duck squirts water at {1}! {2} lose {3} hp.";
+            messages[1] = "{0} the Rubber Duck floats into {1}! {2} lose {3} hp.";
+            messages[2] = "{0} the Rubber Duck pecks at {1}! {2} lose {3} hp.";
 
         }
 
         public override string Attack(Organism opponent)
         {
-            return $"{Name} Rubber Duck squirts water at {opponent.Name}! {opponent.Name} lose {Strength} hp.";
+            string attackString = "";
+            opponent.Health -= Strength;
+            if (rnd.Next(0,100) % 2 == 0)
+            {
+            }
+            return attackString;
         }
 
     }

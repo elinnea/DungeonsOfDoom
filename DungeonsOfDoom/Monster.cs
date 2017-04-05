@@ -31,6 +31,7 @@ namespace DungeonsOfDoom
                 default:
                     break;
             }
+            return null;
         }
     }
 }
