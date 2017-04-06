@@ -50,7 +50,7 @@ namespace DungeonsOfDoom
                 Battle(monster);
                 if (monster.Inventory.Count > 0)
                 {
-                    Item it = monster.Inventory.First();
+                    Item it = monster.Inventory.First() as Item;
                     latestEvent += $"\nThe monster dropped something... \nYou found: {it.Name}! Wohoo!"; // Inte så dry om flera items...
                     if (player.Weight + it.Weight <= player.MaxWeight)
                     {
@@ -58,11 +58,13 @@ namespace DungeonsOfDoom
                         player.Weight += it.Weight;
                         latestEvent += $"\nYou picked the {it.Name}.";
                     }
-                    else
-                    {
-                        latestEvent += $"\nYour inventory is full and you couldn't pick up the {it.Name}.";
-                        tempRoom.Item = it;
-                    }
+                
+                else
+                {
+                    latestEvent += $"\nYour inventory is full and you couldn't pick up the {it.Name}.";
+                    tempRoom.Item = it;
+                }
+                    player.Inventory.Add(monster);
                 }
                 tempRoom.Monster = null;
 

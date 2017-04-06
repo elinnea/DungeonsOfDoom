@@ -47,6 +47,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Heffaklump.cs" />
+    <Compile Include="ICarriable.cs" />
+    <Compile Include="IConsumable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Organism.cs" />

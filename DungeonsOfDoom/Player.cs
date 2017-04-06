@@ -26,7 +26,7 @@ namespace DungeonsOfDoom
 
         public static Player CreatePlayer()
         {
-            return new Player("Player", 'P', 100, 5, 0, 0, 50);
+            return new Player("Player", 'P', 1000, 5, 0, 0, 50);
         }
 
         //TODO förlora strength efter attack? 

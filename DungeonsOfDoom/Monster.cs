@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    abstract class Monster : Organism
+    abstract class Monster : Organism, ICarriable
     {
+        public int Weight { get; }
         protected string[] messages;
         public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
         {
