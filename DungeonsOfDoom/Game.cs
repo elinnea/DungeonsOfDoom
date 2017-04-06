@@ -187,6 +187,7 @@ namespace DungeonsOfDoom
             }
             Console.SetCursorPosition(oldX, oldY);
             Console.Write(tmp);
+        }
 
         private void ClearLog()
         {
