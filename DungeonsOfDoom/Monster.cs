@@ -9,7 +9,6 @@ namespace DungeonsOfDoom
 {
     abstract class Monster : Organism
     {
-        new public int Weight { get; }
         protected string[] messages;
         public Monster(string name, char icon, int health, int strength, int weight, int power) : base(name, icon, health, strength, weight, power) 
         {

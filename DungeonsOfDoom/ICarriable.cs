@@ -8,7 +8,7 @@ namespace DungeonsOfDoom
 {
     interface ICarriable
     {
-        int Weight { get;}
+        int Weight { get; }
         string PickUp(Organism organism);
         int Power { get; set; }
     }
