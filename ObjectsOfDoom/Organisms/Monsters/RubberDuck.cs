@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    class RubberDuck : Monster
+    public class RubberDuck : Monster
     {
         //static Random rnd = new Random();
         public RubberDuck() : base("Rupert the Rubber Duck", 'M', RandomUtils.Number(15,26), RandomUtils.Number(5,11), RandomUtils.Number(1,2), 0)

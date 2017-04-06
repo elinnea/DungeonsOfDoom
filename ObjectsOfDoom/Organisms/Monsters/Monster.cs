@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    abstract class Monster : Organism
+    public abstract class Monster : Organism
     {
         new public int Weight { get; }
         protected string[] messages;

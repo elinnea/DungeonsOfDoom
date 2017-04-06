@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    abstract class Item : GameObject, ICarriable
+    public abstract class Item : GameObject, ICarriable
     {
         static Random rnd = new Random();
         public Item(string name, char icon, int weight, int power) : base(name, icon, power)

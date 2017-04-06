@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    class Consumable : Item, IConsumable
+    public class Consumable : Item, IConsumable
     {
         public Consumable(string name, char icon, int weight, int power) : base(name, icon, weight, power)
         {
