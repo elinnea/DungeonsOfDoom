@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonsOfDoom
+namespace Utils
 {
-    static class RandomUtils
+    public static class RandomUtils
     {
         static Random r = new Random();
         public static int Number(int min, int max)
