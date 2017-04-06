@@ -96,7 +96,7 @@ namespace DungeonsOfDoom
         {
             Console.Clear();
             Console.SetCursorPosition(30, 15);
-            TextUtils.AnimateText("Congratulations! You clopped all monsters and won!", 70);
+            TextUtils.AnimateText("Congratulations! You clopped all monsters and won! Vajjert!", 70);
             Thread.Sleep(5000);
         }
 
