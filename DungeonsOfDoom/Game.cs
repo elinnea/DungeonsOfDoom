@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Utils;
 
 namespace DungeonsOfDoom
 {
@@ -264,8 +265,9 @@ namespace DungeonsOfDoom
 
         private void Eat()
         {
-            foreach (Item item in player.Inventory)
+            foreach ( Item item in player.Inventory)
             {
+                
                 if (item is Consumable)
                 {
                     player.Health += item.Power;
