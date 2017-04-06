@@ -12,15 +12,18 @@ namespace DungeonsOfDoom
         protected string[] messages;
         public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
         {
-            if (RandomUtils.Randomize(0,100) < 10) 
+            if (RandomUtils.Percent(10)) 
             {
                 Item.GenerateItem().PickUpItem(this);
             }
+            MonsterCount++;
         }
-        
+
+        public static int MonsterCount { get; set; }
+
         public static Monster GenerateMonster()
         {
-            switch (RandomUtils.Randomize(0,2))
+            switch (RandomUtils.Number(0,2))
             {
                 case 0:
                     return new Heffaklump();

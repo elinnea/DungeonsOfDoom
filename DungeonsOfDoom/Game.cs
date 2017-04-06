@@ -23,8 +23,8 @@ namespace DungeonsOfDoom
         {
             player = Player.CreatePlayer();
             CreateWorld();
-            //TextUtils.AnimateText("WELCOME TO THE DUNGEONS OF DOOM", 100);
-            //Thread.Sleep(1000);
+            TextUtils.AnimateText("WELCOME TO THE DUNGEONS OF DOOM", 100);
+            Thread.Sleep(1000);
 
             Console.Clear();
             DisplayWorld();
@@ -33,11 +33,20 @@ namespace DungeonsOfDoom
             {
                 AskForMovement();
                 DisplayStats();
+                if (Monster.MonsterCount == 0)
+                {
+                    GameWon();
+                    break;
+                }
                 //CheckRoom();
 
-            } while (player.Health > 0);
+            } while (player.IsAlive);
 
-            GameOver();
+            if (!player.IsAlive)
+            {
+                GameOver();
+            }
+
         }
 
         private void CheckRoom()
@@ -67,14 +76,24 @@ namespace DungeonsOfDoom
                     player.Inventory.Add(monster);
                 }
                 tempRoom.Monster = null;
-
+                Monster.MonsterCount--;
 
             }
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
             {
                 latestEvent = tempRoom.Item.PickUpItem(player);
+                player.Weight += tempRoom.Item.Weight;
                 tempRoom.Item = null;
             }
+
+        }
+
+        private void GameWon()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(30, 15);
+            TextUtils.AnimateText("Congratulations! You clonked all monsters and won!", 70);
+            Thread.Sleep(5000);
         }
 
         private void Battle(Monster monster)
@@ -82,23 +101,19 @@ namespace DungeonsOfDoom
             int playerHealth = player.Health, monsterHealth = monster.Health;
             do
             {
-                if (RandomUtils.Randomize(0, 10) % 2 == 0)
+                if (RandomUtils.Percent(50))
                 {
-                    //player.Health -= monster.Strength;
                     latestEvent += monster.Attack(player);
                     if (player.IsAlive)
                     {
-                        //monster.Health -= player.Strength;
                         latestEvent += player.Attack(monster);
                     }
                 }
                 else
                 {
-                    //monster.Health -= player.Strength;
                     latestEvent += player.Attack(monster);
                     if (monster.IsAlive)
                     {
-                        //player.Health -= monster.Strength;
                         latestEvent += monster.Attack(player);
 
                     }
@@ -251,7 +266,7 @@ namespace DungeonsOfDoom
                 {
                     player.Health += item.Power;
                     player.Inventory.Remove(item);
-                    //player.Weight -= item.Weight;
+                    player.Weight -= item.Weight;
                     break;
                 }
 
@@ -295,10 +310,13 @@ namespace DungeonsOfDoom
 
         private void GameOver()
         {
+
             Console.Clear();
             TextUtils.AnimateText("GAME OVER", 100);
+            Console.WriteLine();
             Thread.Sleep(1000);
             Console.WriteLine("Play again? Y/N");
+
 
 
             while (true)
@@ -329,12 +347,12 @@ namespace DungeonsOfDoom
 
                     if (player.X != x || player.Y != y)
                     {
-                        if (RandomUtils.Randomize(0, 100) < 10)
+                        if (RandomUtils.Percent(10))
                         {
                             world[x, y].Monster = Monster.GenerateMonster();
                         }
 
-                        if (RandomUtils.Randomize(0, 100) < 10)
+                        if (RandomUtils.Percent(10))
                         {
                             if (world[x, y].Monster != null)
                             {

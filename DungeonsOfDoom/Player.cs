@@ -28,13 +28,11 @@ namespace DungeonsOfDoom
         {
             return new Player("Player", 'P', 1000, 5, 0, 0, 50);
         }
-
-        //TODO förlora strength efter attack? 
+                
         public override string Attack(Organism opponent) 
         {
             opponent.Health -= Strength;
             return $"{Name} hit {opponent.Name} for {Strength} hp!\n";
-
         }
 
         //TODO UseItem = Eat()? 
