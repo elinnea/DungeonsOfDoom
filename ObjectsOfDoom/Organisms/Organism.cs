@@ -12,7 +12,7 @@ namespace ObjectsOfDoom
         {
             Health = health;
             Strength = strength;
-           // Weight = weight;
+            Weight = weight;
             Inventory = new List<ICarriable>();
         }
 

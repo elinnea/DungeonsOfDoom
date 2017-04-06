@@ -28,7 +28,7 @@ namespace DungeonsOfDoom
             player = Player.CreatePlayer();
             CreateWorld();
             Console.SetCursorPosition(30, 15);
-            TextUtils.AnimateText("WELCOME TO THE DUNGEONS OF DOOM", 100);
+            "WELCOME TO THE DUNGEONS OF DOOM".AnimateText(100);
             Thread.Sleep(1000);
 
 
@@ -100,7 +100,7 @@ namespace DungeonsOfDoom
         {
             Console.Clear();
             Console.SetCursorPosition(30, 15);
-            TextUtils.AnimateText("Congratulations! You clopped all monsters and won! Vajjert!\n\n\n\n\n\n\n\n\n\n\n", 70);
+            "Congratulations! You clopped all monsters and won! Vajjert!\n\n\n\n\n\n\n\n\n\n\n".AnimateText(70);
             Thread.Sleep(5000);
         }
 
