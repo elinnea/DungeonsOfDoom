@@ -6,20 +6,27 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    abstract class Monster : Organism, ICarriable
+    abstract class Monster : Organism
     {
-        public int Weight { get; }
+        new public int Weight { get; }
         protected string[] messages;
-        public Monster(string name, char icon, int health, int strength) : base(name, icon, health, strength) 
+        public Monster(string name, char icon, int health, int strength, int weight) : base(name, icon, health, strength, weight) 
         {
             if (RandomUtils.Percent(10)) 
             {
-                Item.GenerateItem().PickUpItem(this);
+                Item.GenerateItem().PickUp(this);
             }
             MonsterCount++;
         }
 
         public static int MonsterCount { get; set; }
+
+        public override string PickUp(Organism organism)
+        {
+            organism.Weight += Weight;
+            organism.Inventory.Add(this);
+            return ($"Picked up {Name}\n");
+        }
 
         public static Monster GenerateMonster()
         {

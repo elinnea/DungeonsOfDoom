@@ -63,20 +63,22 @@ namespace DungeonsOfDoom
                 if (monster.Inventory.Count > 0)
                 {
                     Item it = monster.Inventory.First() as Item;
-                    latestEvent += $"\nThe monster dropped something... \nYou found: {it.Name}! Wohoo!"; // Inte så dry om flera items...
                     if (player.Weight + it.Weight <= player.MaxWeight)
                     {
-                        player.Inventory.Add(it);
+                        
                         player.Weight += it.Weight;
-                        latestEvent += $"\nYou picked the {it.Name}.";
+                        latestEvent += it.PickUp(player);
                     }
-                
-                else
-                {
-                    latestEvent += $"\nYour inventory is full and you couldn't pick up the {it.Name}.";
-                    tempRoom.Item = it;
+
+                    else
+                    {
+                        latestEvent += $"\nYour inventory is full and you couldn't pick up the {it.Name}.";
+                        tempRoom.Item = it;
+                    }
                 }
-                    player.Inventory.Add(monster);
+                if (player.Weight + monster.Weight <= player.MaxWeight)
+                {
+                    latestEvent += monster.PickUp(player);
                 }
                 tempRoom.Monster = null;
                 Monster.MonsterCount--;
@@ -84,7 +86,7 @@ namespace DungeonsOfDoom
             }
             if (tempRoom.Item != null && (player.Weight + tempRoom.Item.Weight) <= player.MaxWeight)
             {
-                latestEvent = tempRoom.Item.PickUpItem(player);
+                latestEvent = tempRoom.Item.PickUp(player);
                 player.Weight += tempRoom.Item.Weight;
                 tempRoom.Item = null;
             }
@@ -125,7 +127,7 @@ namespace DungeonsOfDoom
             } while (monster.IsAlive && player.IsAlive);
             if (player.IsAlive)
             {
-                latestEvent += $"\nYou beat the monster! You suffered {playerHealth - player.Health} damage and dealt {monsterHealth - monster.Health} in return!";
+                latestEvent += $"\nYou beat the monster! You suffered {playerHealth - player.Health} damage and dealt {monsterHealth - monster.Health} in return!\n";
             }
 
         }
