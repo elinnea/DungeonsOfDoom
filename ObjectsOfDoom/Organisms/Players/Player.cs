@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    class Player : Organism
+    public class Player : Organism
     {
         //TODO max health? 
         

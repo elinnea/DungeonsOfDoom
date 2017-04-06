@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    class Heffaklump :Monster
+    public class Heffaklump :Monster
     {
         public Heffaklump() :base ("Hedvig Heffaklump", 'M', 20, 5, RandomUtils.Number(5, 10), 0)
         {

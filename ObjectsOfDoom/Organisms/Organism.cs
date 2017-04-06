@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    abstract class Organism : GameObject
+    public abstract class Organism : GameObject
     {
         public Organism(string name, char icon, int health, int strength, int weight, int power) : base(name, icon, power)
         {
@@ -18,7 +18,7 @@ namespace DungeonsOfDoom
 
         public int Health { get; set; }
         public int Strength { get; set; }
-        public List<ICarriable> Inventory { get; private set; }
+        public List<ICarriable> Inventory { get; set; }
         public bool IsAlive { get { return Health > 0; } }
         public abstract string Attack(Organism opponent);
 

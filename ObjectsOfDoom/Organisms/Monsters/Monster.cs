@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    abstract class Monster : Organism
+    public abstract class Monster : Organism
     {
         protected string[] messages;
         public Monster(string name, char icon, int health, int strength, int weight, int power) : base(name, icon, health, strength, weight, power) 
@@ -17,6 +17,11 @@ namespace DungeonsOfDoom
                 Item.GenerateItem().PickUp(this);
             }
             MonsterCount++;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}, power: {Power}, weight: {Weight}";
         }
 
         public static int MonsterCount { get; set; }

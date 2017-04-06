@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    class Weapon : Item
+    public class Weapon : Item
     {
         public Weapon(string name, char icon, int weight, int power) : base(name, icon, weight, power)
         {

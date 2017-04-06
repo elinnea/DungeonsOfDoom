@@ -43,22 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumable.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameObject.cs" />
-    <Compile Include="Heffaklump.cs" />
-    <Compile Include="ICarriable.cs" />
-    <Compile Include="IConsumable.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Monster.cs" />
-    <Compile Include="Organism.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Room.cs" />
-    <Compile Include="RubberDuck.cs" />
-    <Compile Include="Toucan.cs" />
-    <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,8 +54,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ObjectsOfDoom\ObjectsOfDoom.csproj">
+      <Project>{40570534-6469-41ff-b4b6-adcc20fabde7}</Project>
+      <Name>ObjectsOfDoom</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
-      <Project>{33db17c0-6bfa-41d2-a354-c93364d39a1f}</Project>
+      <Project>{1a3e429b-777a-4d16-bfc3-5d0e673b9c1f}</Project>
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
