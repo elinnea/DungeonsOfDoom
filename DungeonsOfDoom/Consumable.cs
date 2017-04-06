@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    class Consumable : Item
+    class Consumable : Item, IConsumable
     {
         public Consumable(string name, char icon, int weight, int power) : base(name, icon, weight, power)
         {
         }
+
+        public int HealthGain { get; set; }
 
         public override string PickUpItem(Organism organism)
         {

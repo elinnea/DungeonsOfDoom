@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    abstract class Item : GameObject
+    abstract class Item : GameObject, ICarriable
     {
         static Random rnd = new Random();
         public Item(string name, char icon, int weight, int power) : base(name, icon)
