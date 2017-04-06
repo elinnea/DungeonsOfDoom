@@ -36,7 +36,7 @@ namespace DungeonsOfDoom
             do
             {
                 AskForMovement();
-                DisplayStats();
+                 DisplayStats();
                 if (Monster.MonsterCount == 0)
                 {
                     GameWon();
@@ -265,7 +265,7 @@ namespace DungeonsOfDoom
 
         private void Eat()
         {
-            foreach ( Item item in player.Inventory)
+            foreach (ICarriable item in player.Inventory)
             {
                 
                 if (item is Consumable)

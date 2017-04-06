@@ -10,7 +10,7 @@ namespace DungeonsOfDoom
     {
         //TODO max health? 
         
-        public Player(string name, char icon, int health, int attack, int x, int y, int maxWeight) : base(name, icon, health, attack, 0) //Constructor sätter klassens state
+        public Player(string name, char icon, int health, int attack, int x, int y, int maxWeight) : base(name, icon, health, attack, 0, 0) //Constructor sätter klassens state
         {
             X = x;
             Y = y;

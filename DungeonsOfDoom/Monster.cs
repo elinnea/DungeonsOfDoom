@@ -11,7 +11,7 @@ namespace DungeonsOfDoom
     {
         new public int Weight { get; }
         protected string[] messages;
-        public Monster(string name, char icon, int health, int strength, int weight) : base(name, icon, health, strength, weight) 
+        public Monster(string name, char icon, int health, int strength, int weight, int power) : base(name, icon, health, strength, weight, power) 
         {
             if (RandomUtils.Percent(10)) 
             {

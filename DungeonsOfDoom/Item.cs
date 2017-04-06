@@ -10,12 +10,12 @@ namespace DungeonsOfDoom
     abstract class Item : GameObject, ICarriable
     {
         static Random rnd = new Random();
-        public Item(string name, char icon, int weight, int power) : base(name, icon)
+        public Item(string name, char icon, int weight, int power) : base(name, icon, power)
         {
             Weight = weight;
-            Power = power;
+            //Power = power;
         }
-        public int Power { get; protected set; }
+        //public int Power { get; set; }
         new public int Weight { get; private set; }
         
 

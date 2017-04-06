@@ -9,7 +9,7 @@ namespace DungeonsOfDoom
 {
     class Toucan : Monster
     {
-        public Toucan() : base("Tony Toucan", 'M', RandomUtils.Number(25,35), RandomUtils.Number(12,19), RandomUtils.Number(2,3))
+        public Toucan() : base("Tony Toucan", 'M', RandomUtils.Number(25,35), RandomUtils.Number(12,19), RandomUtils.Number(2,3), 0)
         {
             messages = new string[3];
             messages[0] = $"{Name} pecks at your eyes with his mighty beak, dealing {Strength} damage. ";

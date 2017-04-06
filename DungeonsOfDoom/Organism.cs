@@ -8,7 +8,7 @@ namespace DungeonsOfDoom
 {
     abstract class Organism : GameObject
     {
-        public Organism(string name, char icon, int health, int strength, int weight) : base(name, icon)
+        public Organism(string name, char icon, int health, int strength, int weight, int power) : base(name, icon, power)
         {
             Health = health;
             Strength = strength;

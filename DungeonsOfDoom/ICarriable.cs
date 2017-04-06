@@ -10,5 +10,6 @@ namespace DungeonsOfDoom
     {
         int Weight { get;}
         string PickUp(Organism organism);
+        int Power { get; set; }
     }
 }
