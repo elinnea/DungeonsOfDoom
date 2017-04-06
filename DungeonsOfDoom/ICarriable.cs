@@ -9,5 +9,6 @@ namespace DungeonsOfDoom
     interface ICarriable
     {
         int Weight { get;}
+        string PickUp(Organism organism);
     }
 }

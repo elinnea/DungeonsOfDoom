@@ -13,11 +13,11 @@ namespace DungeonsOfDoom
 
         }
 
-        public override string PickUpItem(Organism organism)
+        public override string PickUp(Organism organism)
         {
             organism.Inventory.Add(this);
             organism.Strength += Power;
-            return $"Item picked up: {Name}\nItem power: {Power}";
+            return $"Item picked up: {Name}\nItem power: {Power} \n";
         }
 
         public override string UseItem(Organism user)

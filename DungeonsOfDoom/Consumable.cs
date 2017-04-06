@@ -14,17 +14,17 @@ namespace DungeonsOfDoom
 
         public int HealthGain { get; set; }
 
-        public override string PickUpItem(Organism organism)
+        public override string PickUp(Organism organism)
         {
             organism.Inventory.Add(this);
-            return $"Item {Name} with a power of {Power} was added to backpack. ";
+            return $"Item {Name} with a power of {Power} was added to backpack. \n";
         }
 
         public override string UseItem(Organism user)
         {
             user.Health += Power;
             //user.Inventory.Remove(this);
-            return $"Ate an {Name} and gained {Power} health.";
+            return $"Ate an {Name} and gained {Power} health. \n";
         }
     }
 }

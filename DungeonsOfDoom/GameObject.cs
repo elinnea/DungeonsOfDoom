@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonsOfDoom
 {
-    abstract class GameObject
+    abstract class GameObject : ICarriable
     {
         public GameObject(string name, char icon)
         {
@@ -16,5 +16,9 @@ namespace DungeonsOfDoom
 
         public string Name { get; private set; }
         public char Icon { get; private set; }
+
+        public int Weight { get; set; }
+
+        public abstract string PickUp(Organism organism);
     }
 }
