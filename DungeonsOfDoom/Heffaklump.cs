@@ -8,7 +8,7 @@ namespace DungeonsOfDoom
 {
     class Heffaklump :Monster
     {
-        public Heffaklump() :base ("Hedvig Heffaklump", 'M', 20, 5, RandomUtils.Number(5, 10))
+        public Heffaklump() :base ("Hedvig Heffaklump", 'M', 20, 5, RandomUtils.Number(5, 10), 0)
         {
            
         }
