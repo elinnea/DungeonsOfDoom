@@ -20,6 +20,11 @@ namespace ObjectsOfDoom
             MonsterCount++;
         }
 
+        public override string ToString()
+        {
+            return $"{Name}, power: {Power}, weight: {Weight}";
+        }
+
         public static int MonsterCount { get; set; }
 
         public override string PickUp(Organism organism)

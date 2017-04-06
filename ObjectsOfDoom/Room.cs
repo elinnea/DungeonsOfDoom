@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonsOfDoom
+namespace ObjectsOfDoom
 {
-    class Room
+    public class Room
     {
         public Monster Monster { get; set; }
         public Item Item { get; set; }

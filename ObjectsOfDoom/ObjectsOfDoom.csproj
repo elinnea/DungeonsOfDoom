@@ -53,6 +53,7 @@
     <Compile Include="Organisms\Monsters\Toucan.cs" />
     <Compile Include="Organisms\Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Room.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">
