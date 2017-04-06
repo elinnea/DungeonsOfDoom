@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Utils;
 
 namespace DungeonsOfDoom
 {
@@ -14,11 +15,13 @@ namespace DungeonsOfDoom
         readonly int sizeX, sizeY;
         string latestEvent;
         int newX = 0, newY = 0, oldX = 0, oldY = 0, oldPlayerX = 0;
+
         public Game()
         {
             sizeX = 30;
             sizeY = 10;
         }
+
         public void Play()
         {
             player = Player.CreatePlayer();
@@ -96,7 +99,7 @@ namespace DungeonsOfDoom
         {
             Console.Clear();
             Console.SetCursorPosition(30, 15);
-            TextUtils.AnimateText("Congratulations! You clopped all monsters and won! Vajjert!", 70);
+            TextUtils.AnimateText("Congratulations! You clopped all monsters and won! Vajjert!\n\n\n\n\n\n\n\n\n\n\n", 70);
             Thread.Sleep(5000);
         }
 
